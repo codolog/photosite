@@ -3,9 +3,16 @@ import { createClient } from "@/lib/supabase/server";
 import { isAdmin } from "@/lib/auth";
 
 export async function Header() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  const admin = await isAdmin();
+  let user: { id: string; email?: string } | null = null;
+  let admin = false;
+  try {
+    const supabase = await createClient();
+    const { data: { user: u } } = await supabase.auth.getUser();
+    user = u;
+    admin = await isAdmin();
+  } catch {
+    // Без Supabase показываем шапку без входа
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur">

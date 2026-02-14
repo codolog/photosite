@@ -2,12 +2,18 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function HomePage() {
-  const supabase = await createClient();
-  const { data: expeditions } = await supabase
-    .from("expeditions")
-    .select("id, year, title, place")
-    .order("year", { ascending: false })
-    .limit(6);
+  let expeditions: { id: string; year: number; title: string; place: string | null }[] | null = null;
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase
+      .from("expeditions")
+      .select("id, year, title, place")
+      .order("year", { ascending: false })
+      .limit(6);
+    expeditions = data;
+  } catch {
+    expeditions = [];
+  }
 
   return (
     <div className="space-y-10">
