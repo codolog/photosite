@@ -60,7 +60,7 @@ export default async function ExpeditionPage({ params }: { params: Promise<{ id:
         <section>
           <h2 className="text-lg font-semibold mb-2">Участники</h2>
           <ul className="list-disc list-inside text-[var(--color-muted)]">
-            {participantList.map((name, i) => (
+            {participantList.map((name: string, i: number) => (
               <li key={i}>{name.trim()}</li>
             ))}
           </ul>
