@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #faf9f6;
+  --color-surface: #ffffff;
+  --color-border: #e8e6e1;
+  --color-text: #1a1a1a;
+  --color-muted: #6b6b6b;
+  --color-accent: #2d5a3d;
+  --color-accent-hover: #234a30;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans), "PT Sans", system-ui, sans-serif;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-colors;
+  }
+  .btn-primary {
+    @apply btn bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)];
+  }
+  .btn-secondary {
+    @apply btn bg-[var(--color-border)] text-[var(--color-text)] hover:bg-gray-300;
+  }
+  .card {
+    @apply rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-sm;
+  }
+  .input {
+    @apply w-full rounded-lg border border-[var(--color-border)] bg-white px-3 py-2 text-[var(--color-text)] placeholder:text-[var(--color-muted)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)];
+  }
+}
